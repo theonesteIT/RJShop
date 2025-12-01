@@ -323,6 +323,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('mobileSearchClose');
     if (openBtn) openBtn.addEventListener('click', openMobileSearch);
     if (closeBtn) closeBtn.addEventListener('click', closeMobileSearch);
+    // Close overlay when clicking outside the content (tap backdrop)
+    const overlay = document.getElementById('mobileSearchOverlay');
+    if (overlay) {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closeMobileSearch();
+            }
+        });
+    }
     // allow escape key to close overlay/menu
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
