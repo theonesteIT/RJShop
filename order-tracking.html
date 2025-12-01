@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order - ShopHub</title>
+    <link rel="stylesheet" href="order-tracking.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                <span>ShopHub</span>
+            </a>
+            <div class="header-actions">
+                <a href="index.html" class="header-btn btn-outline">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="#" class="header-btn btn-primary">
+                    <i class="fas fa-user"></i> Sign In
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Track Input Section (For Guest Users) -->
+        <div class="track-input-section" id="trackInputSection">
+            <div class="track-card">
+                <div class="track-header">
+                    <div class="track-icon">
+                        <i class="fas fa-search-location"></i>
+                    </div>
+                    <h1>Track Your Order</h1>
+                    <p>Enter your order details to track your package</p>
+                </div>
+
+                <div class="track-tabs">
+                    <button class="track-tab active" data-tab="orderid" onclick="switchTab('orderid')">
+                        <i class="fas fa-hashtag"></i> Order ID
+                    </button>
+                    <button class="track-tab" data-tab="phone" onclick="switchTab('phone')">
+                        <i class="fas fa-phone"></i> Phone Number
+                    </button>
+                    <button class="track-tab" data-tab="email" onclick="switchTab('email')">
+                        <i class="fas fa-envelope"></i> Email
+                    </button>
+                </div>
+
+                <!-- Order ID Tab -->
+                <div class="track-form active" id="orderidForm">
+                    <div class="form-group">
+                        <label for="orderId">Order ID / Tracking Number</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-hashtag"></i>
+                            <input type="text" id="orderId" placeholder="e.g., ORD-123456 or TRK-789012">
+                        </div>
+                    </div>
+                    <button class="btn btn-track" onclick="trackOrder('orderid')">
+                        <i class="fas fa-search"></i> Track Order
+                    </button>
+                </div>
+
+                <!-- Phone Tab -->
+                <div class="track-form" id="phoneForm">
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="phoneNumber" placeholder="+250 7XX XXX XXX">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneOrderId">Order ID (Optional)</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-hashtag"></i>
+                            <input type="text" id="phoneOrderId" placeholder="ORD-123456">
+                        </div>
+                    </div>
+                    <button class="btn btn-track" onclick="trackOrder('phone')">
+                        <i class="fas fa-search"></i> Track Order
+                    </button>
+                </div>
+
+                <!-- Email Tab -->
+                <div class="track-form" id="emailForm">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="email" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailOrderId">Order ID (Optional)</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-hashtag"></i>
+                            <input type="text" id="emailOrderId" placeholder="ORD-123456">
+                        </div>
+                    </div>
+                    <button class="btn btn-track" onclick="trackOrder('email')">
+                        <i class="fas fa-search"></i> Track Order
+                    </button>
+                </div>
+
+                <div class="track-help">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Need help? <a href="#" onclick="openSupport()">Contact Support</a></span>
+                </div>
+
+                <!-- Error Message -->
+                <div class="error-message" id="errorMessage" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span id="errorText">Order not found. Please check your details and try again.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Tracking Section (Hidden initially) -->
+        <div class="tracking-section" id="trackingSection" style="display: none;">
+            
+            <!-- Alert Messages -->
+            <div class="alert-banner">
+                <i class="fas fa-truck"></i>
+                <span id="alertMessage">Your package is out for delivery today!</span>
+            </div>
+
+            <div class="tracking-grid">
+                <!-- Left Column -->
+                <div class="tracking-main">
+                    
+                    <!-- Order Summary Box -->
+                    <div class="card order-summary-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-receipt"></i> Order Summary</h2>
+                            <span class="status-badge status-shipping" id="orderStatus">In Transit</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="summary-grid">
+                                <div class="summary-item">
+                                    <span class="label">Order ID</span>
+                                    <span class="value" id="summaryOrderId">#ORD-654321</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Tracking Number</span>
+                                    <span class="value" id="trackingNumber">TRK-9876543210</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Order Date</span>
+                                    <span class="value" id="orderDate">Nov 25, 2024</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Est. Delivery</span>
+                                    <span class="value highlight" id="deliveryDate">Nov 30, 2024</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Delivery Method</span>
+                                    <span class="value" id="deliveryMethod">Express Delivery</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Payment Method</span>
+                                    <span class="value" id="paymentMethod">Visa •••• 4242</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Order Amount</span>
+                                    <span class="value price" id="orderAmount">$259.99</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="label">Customer</span>
+                                    <span class="value" id="customerName">John Doe</span>
+                                </div>
+                            </div>
+                            <div class="summary-actions">
+                                <button class="btn btn-outline-sm" onclick="reorder()">
+                                    <i class="fas fa-redo"></i> Reorder
+                                </button>
+                                <button class="btn btn-outline-sm" onclick="downloadInvoice()">
+                                    <i class="fas fa-download"></i> Invoice
+                                </button>
+                                <button class="btn btn-outline-sm" onclick="contactSupport()">
+                                    <i class="fas fa-headset"></i> Support
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Status Timeline -->
+                    <div class="card timeline-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-route"></i> Order Status Timeline</h2>
+                            <button class="btn-refresh" onclick="refreshTracking()">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="progress-track">
+                                <div class="progress-bar-track">
+                                    <div class="progress-fill-track" id="progressFillTrack" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div class="timeline" id="timeline">
+                                <div class="timeline-item completed">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3>Order Placed</h3>
+                                        <p>Your order has been placed successfully</p>
+                                        <span class="timeline-date">Nov 25, 2024 - 10:30 AM</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item completed">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-credit-card"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3>Payment Verified</h3>
+                                        <p>Payment confirmed and order confirmed</p>
+                                        <span class="timeline-date">Nov 25, 2024 - 10:35 AM</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item completed">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-box"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3>Processing</h3>
+                                        <p>Your items are being packed</p>
+                                        <span class="timeline-date">Nov 26, 2024 - 09:00 AM</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item active">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-shipping-fast"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3>Shipped</h3>
+                                        <p>Package is in transit to your location</p>
+                                        <span class="timeline-date">Nov 27, 2024 - 02:15 PM</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item pending">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3>Out for Delivery</h3>
+                                        <p>Package is out for delivery</p>
+                                        <span class="timeline-date">Pending</span>
+                                    </div>
+                                </div>
+                                <div class="timeline-item pending">
+                                    <div class="timeline-icon">
+                                        <i class="fas fa-home"></i>
+                                    </div>
+                                    <div class="timeline-content">
+                                        <h3>Delivered</h3>
+                                        <p>Package delivered successfully</p>
+                                        <span class="timeline-date">Pending</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Live Tracking Map -->
+                    <div class="card map-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-map-marked-alt"></i> Live Tracking</h2>
+                            <button class="btn-track-live" onclick="enableLiveTracking()">
+                                <i class="fas fa-broadcast-tower"></i> Track Live
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="map-container" id="mapContainer">
+                                <div class="map-placeholder">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                    <p>Click "Track Live" to view real-time location</p>
+                                </div>
+                            </div>
+                            <div class="map-info" id="mapInfo" style="display: none;">
+                                <div class="info-row">
+                                    <i class="fas fa-map-pin"></i>
+                                    <span>Current Location: <strong id="currentLocation">Kigali City Center</strong></span>
+                                </div>
+                                <div class="info-row">
+                                    <i class="fas fa-route"></i>
+                                    <span>Distance Remaining: <strong id="distanceRemaining">5.2 km</strong></span>
+                                </div>
+                                <div class="info-row">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Est. Arrival: <strong id="estArrival">30 minutes</strong></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Updates & Logs -->
+                    <div class="card updates-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-list"></i> Shipping Updates</h2>
+                            <select class="filter-select" onchange="filterUpdates(this.value)">
+                                <option value="all">All Updates</option>
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                            </select>
+                        </div>
+                        <div class="card-body">
+                            <div class="updates-list" id="updatesList">
+                                <div class="update-item">
+                                    <div class="update-time">
+                                        <strong>Nov 27, 2024</strong>
+                                        <span>02:15 PM</span>
+                                    </div>
+                                    <div class="update-content">
+                                        <div class="update-status">
+                                            <i class="fas fa-box-open"></i>
+                                            <span>Departed facility</span>
+                                        </div>
+                                        <p class="update-location">Kigali Distribution Center</p>
+                                    </div>
+                                </div>
+                                <div class="update-item">
+                                    <div class="update-time">
+                                        <strong>Nov 27, 2024</strong>
+                                        <span>09:30 AM</span>
+                                    </div>
+                                    <div class="update-content">
+                                        <div class="update-status">
+                                            <i class="fas fa-warehouse"></i>
+                                            <span>Arrived at facility</span>
+                                        </div>
+                                        <p class="update-location">Kigali Distribution Center</p>
+                                    </div>
+                                </div>
+                                <div class="update-item">
+                                    <div class="update-time">
+                                        <strong>Nov 26, 2024</strong>
+                                        <span>06:00 PM</span>
+                                    </div>
+                                    <div class="update-content">
+                                        <div class="update-status">
+                                            <i class="fas fa-truck-loading"></i>
+                                            <span>In transit</span>
+                                        </div>
+                                        <p class="update-location">En route to Kigali</p>
+                                    </div>
+                                </div>
+                                <div class="update-item">
+                                    <div class="update-time">
+                                        <strong>Nov 26, 2024</strong>
+                                        <span>09:00 AM</span>
+                                    </div>
+                                    <div class="update-content">
+                                        <div class="update-status">
+                                            <i class="fas fa-box"></i>
+                                            <span>Package ready</span>
+                                        </div>
+                                        <p class="update-location">Warehouse - Processing Complete</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="card products-card">
+                        <div class="card-header">
+                            <h2><i class="fas fa-boxes"></i> Order Items</h2>
+                        </div>
+                        <div class="card-body">
+                            <div class="products-list" id="productsList">
+                                <div class="product-item-track">
+                                    <img src="https://via.placeholder.com/100" alt="Product">
+                                    <div class="product-info">
+                                        <h4>Wireless Bluetooth Headphones</h4>
+                                        <p>Color: Black | Size: Standard</p>
+                                        <div class="product-price-qty">
+                                            <span class="qty">Qty: 1</span>
+                                            <span class="price">$129.99</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn-icon" onclick="buyAgain(1)">
+                                            <i class="fas fa-redo"></i> Buy Again
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="product-item-track">
+                                    <img src="https://via.placeholder.com/100" alt="Product">
+                                    <div class="product-info">
+                                        <h4>Smart Watch Series 5</h4>
+                                        <p>Color: Silver | Size: 42mm</p>
+                                        <div class="product-price-qty">
+                                            <span class="qty">Qty: 1</span>
+                                            <span class="price">$130.00</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-actions">
+                                        <button class="btn-icon" onclick="buyAgain(2)">
+                                            <i class="fas fa-redo"></i> Buy Again
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Right Sidebar -->
+                <div class="tracking-sidebar">
+                    
+                    <!-- Delivery Partner Info -->
+                    <div class="card partner-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-shipping-fast"></i> Delivery Partner</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="partner-info">
+                                <div class="partner-logo">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div>
+                                    <h4 id="courierName">DHL Express</h4>
+                                    <p id="courierCode">Tracking: TRK-9876543210</p>
+                                </div>
+                            </div>
+                            <div class="driver-info" id="driverInfo">
+                                <div class="driver-avatar">
+                                    <i class="fas fa-user-circle"></i>
+                                </div>
+                                <div class="driver-details">
+                                    <h5 id="driverName">Jean Claude M.</h5>
+                                    <p id="driverPhone">+250 788 XXX XXX</p>
+                                    <p id="vehiclePlate">Vehicle: RAC 123 A</p>
+                                    <div class="driver-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span>4.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact-actions">
+                                <button class="btn btn-primary-sm" onclick="callRider()">
+                                    <i class="fas fa-phone"></i> Call Rider
+                                </button>
+                                <button class="btn btn-outline-sm" onclick="smsRider()">
+                                    <i class="fas fa-sms"></i> SMS
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Package Details -->
+                    <div class="card package-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-box"></i> Package Details</h3>
+                            <button class="btn-collapse" onclick="toggleCard(this)">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="package-detail">
+                                <i class="fas fa-weight"></i>
+                                <div>
+                                    <span class="label">Weight</span>
+                                    <span class="value">2.5 kg</span>
+                                </div>
+                            </div>
+                            <div class="package-detail">
+                                <i class="fas fa-ruler-combined"></i>
+                                <div>
+                                    <span class="label">Dimensions</span>
+                                    <span class="value">30×20×15 cm</span>
+                                </div>
+                            </div>
+                            <div class="package-detail">
+                                <i class="fas fa-boxes"></i>
+                                <div>
+                                    <span class="label">Packages</span>
+                                    <span class="value">1 Package</span>
+                                </div>
+                            </div>
+                            <div class="package-detail">
+                                <i class="fas fa-barcode"></i>
+                                <div>
+                                    <span class="label">Package Code</span>
+                                    <span class="value">PKG-ABC123</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-sm btn-full" onclick="downloadLabel()">
+                                <i class="fas fa-download"></i> Download Label
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Customer Information -->
+                    <div class="card customer-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-user"></i> Customer Info</h3>
+                            <button class="btn-collapse" onclick="toggleCard(this)">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div class="info-group">
+                                <label>Name</label>
+                                <p id="custName">John Doe</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Phone</label>
+                                <p id="custPhone">+250 788 XXX XXX</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Email</label>
+                                <p id="custEmail">john.doe@email.com</p>
+                            </div>
+                            <div class="info-group">
+                                <label>Shipping Address</label>
+                                <p id="shippingAddress">KG 123 St, Apt 4B<br>Kigali, Gasabo<br>Rwanda</p>
+                            </div>
+                            <button class="btn btn-outline-sm btn-full" onclick="editAddress()">
+                                <i class="fas fa-edit"></i> Edit Address
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Delivery Code -->
+                    <div class="card security-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-lock"></i> Delivery Code</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="otp-display">
+                                <div class="otp-label">Your OTP Code</div>
+                                <div class="otp-code" id="otpCode">7 4 9 2</div>
+                                <p class="otp-info">
+                                    <i class="fas fa-info-circle"></i>
+                                    Share this code with the delivery person
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Actions -->
+                    <div class="card actions-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-cog"></i> Order Actions</h3>
+                        </div>
+                        <div class="card-body">
+                            <button class="action-btn" onclick="cancelOrder()">
+                                <i class="fas fa-times-circle"></i>
+                                <span>Cancel Order</span>
+                            </button>
+                            <button class="action-btn" onclick="rescheduleDelivery()">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>Reschedule Delivery</span>
+                            </button>
+                            <button class="action-btn" onclick="changeAddress()">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Change Address</span>
+                            </button>
+                            <button class="action-btn" onclick="requestReturn()">
+                                <i class="fas fa-undo"></i>
+                                <span>Request Return</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Contact Support -->
+                    <div class="card support-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-headset"></i> Need Help?</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="support-option">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <strong>Email</strong>
+                                    <p>support@shophub.com</p>
+                                </div>
+                            </div>
+                            <div class="support-option">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <strong>Phone</strong>
+                                    <p>+250 788 XXX XXX</p>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary-sm btn-full" onclick="openLiveChat()">
+                                <i class="fas fa-comment"></i> Live Chat
+                            </button>
+                            <button class="btn btn-outline-sm btn-full" onclick="submitTicket()">
+                                <i class="fas fa-ticket-alt"></i> Submit Ticket
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="card recommendations-card">
+                        <div class="card-header">
+                            <h3><i class="fas fa-star"></i> You May Also Like</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="recommendation-item">
+                                <img src="https://via.placeholder.com/80" alt="Product">
+                                <div>
+                                    <h5>Premium Headphone Case</h5>
+                                    <p class="rec-price">$19.99</p>
+                                </div>
+                            </div>
+                            <div class="recommendation-item">
+                                <img src="https://via.placeholder.com/80" alt="Product">
+                                <div>
+                                    <h5>Watch Screen Protector</h5>
+                                    <p class="rec-price">$9.99</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="order-tracking.js"></script>
+</body>
+</html>

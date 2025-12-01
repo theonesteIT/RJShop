@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samsung Galaxy A53 5G - ShopHub</title>
+    <link rel="stylesheet" href="product.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>ShopHub</span>
+                </div>
+            </div>
+            <div class="nav-center">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search products...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="nav-right">
+                <button class="icon-btn"><i class="fas fa-heart"></i><span class="badge">3</span></button>
+                <button class="icon-btn"><i class="fas fa-shopping-cart"></i><span class="badge">2</span></button>
+                <button class="icon-btn"><i class="fas fa-user"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="#">Electronics</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="#">Phones</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Samsung Galaxy A53 5G</span>
+        </div>
+    </div>
+
+    <!-- Live Activity Popup -->
+    <div class="live-popup" id="livePopup">
+        <i class="fas fa-shopping-bag"></i>
+        <span>12 people bought this in the last 24 hours</span>
+    </div>
+
+    <!-- Main Product Section -->
+    <div class="container">
+        <div class="product-layout">
+            <!-- Left: Product Gallery -->
+            <div class="product-gallery">
+                <div class="gallery-badges">
+                    <span class="badge-hot">HOT</span>
+                    <span class="badge-discount">-25%</span>
+                </div>
+                
+                <div class="main-image-container">
+                    <div class="main-image" id="mainImage">
+                        <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=800" alt="Product">
+                        <div class="zoom-lens" id="zoomLens"></div>
+                        <button class="fullscreen-btn" onclick="openFullscreen()">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                    <div class="zoom-result" id="zoomResult"></div>
+                </div>
+
+                <div class="thumbnail-gallery">
+                    <button class="gallery-nav prev" onclick="scrollGallery(-1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="thumbnails" id="thumbnails">
+                        <div class="thumbnail active" onclick="changeImage(0)">
+                            <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=200" alt="Thumbnail 1">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(1)">
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200" alt="Thumbnail 2">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(2)">
+                            <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=200" alt="Thumbnail 3">
+                        </div>
+                        <div class="thumbnail" onclick="changeImage(3)">
+                            <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?w=200" alt="Thumbnail 4">
+                        </div>
+                        <div class="thumbnail video-thumb" onclick="playVideo()">
+                            <i class="fas fa-play"></i>
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200" alt="Video">
+                        </div>
+                    </div>
+                    <button class="gallery-nav next" onclick="scrollGallery(1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Product Info -->
+            <div class="product-info">
+                <h1 class="product-title">Samsung Galaxy A53 5G Smartphone</h1>
+                <p class="product-subtitle">6.5" Display, 128GB Storage, Quad Camera</p>
+
+                <!-- Rating & Reviews -->
+                <div class="rating-section">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="rating-number">4.6</span>
+                    </div>
+                    <span class="review-count">239 reviews</span>
+                    <span class="separator">|</span>
+                    <span class="sold-count"><i class="fas fa-fire"></i> 1,234 sold</span>
+                </div>
+
+                <!-- Price Section -->
+                <div class="price-section">
+                    <div class="price-main">
+                        <span class="current-price">$299.00</span>
+                        <span class="old-price">$399.00</span>
+                        <span class="discount-badge">Save $100 (25%)</span>
+                    </div>
+                    <div class="installment-info">
+                        <i class="fas fa-credit-card"></i>
+                        Or pay in 4 installments of $74.75 with <strong>PayLater</strong>
+                    </div>
+                </div>
+
+                <!-- Key Highlights -->
+                <div class="highlights-section">
+                    <h3>Key Features</h3>
+                    <div class="highlights-grid">
+                        <div class="highlight-item">
+                            <i class="fas fa-battery-full"></i>
+                            <span>Long Battery Life</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Fast Performance</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <span>1 Year Warranty</span>
+                        </div>
+                        <div class="highlight-item">
+                            <i class="fas fa-water"></i>
+                            <span>Water Resistant</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Color Selection -->
+                <div class="variation-section">
+                    <h3>Color: <span id="selectedColor">Awesome Black</span></h3>
+                    <div class="color-options">
+                        <div class="color-option active" data-color="Awesome Black" onclick="selectColor(this)" style="background: #1a1a1a;">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="color-option" data-color="Awesome White" onclick="selectColor(this)" style="background: #f5f5f5;">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="color-option" data-color="Awesome Blue" onclick="selectColor(this)" style="background: #4a90e2;">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="color-option" data-color="Awesome Peach" onclick="selectColor(this)" style="background: #ffb6c1;">
+                            <i class="fas fa-check"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Storage Selection -->
+                <div class="variation-section">
+                    <h3>Storage: <span id="selectedStorage">128GB</span></h3>
+                    <div class="storage-options">
+                        <button class="storage-btn active" onclick="selectStorage(this, '128GB')">128GB</button>
+                        <button class="storage-btn" onclick="selectStorage(this, '256GB')">256GB <span class="extra-price">+$50</span></button>
+                    </div>
+                </div>
+
+                <!-- Stock Status -->
+                <div class="stock-section">
+                    <div class="stock-info in-stock">
+                        <i class="fas fa-check-circle"></i>
+                        <span>In Stock - Only 3 left!</span>
+                    </div>
+                    <div class="delivery-estimate">
+                        <i class="fas fa-truck"></i>
+                        <span>Delivery by <strong>Dec 2, 2025</strong> to <strong>Kigali</strong></span>
+                        <a href="#" onclick="changeLocation()">Change</a>
+                    </div>
+                </div>
+
+                <!-- Quantity Selector -->
+                <div class="quantity-section">
+                    <h3>Quantity:</h3>
+                    <div class="quantity-controls">
+                        <button class="qty-btn" onclick="updateQuantity(-1)">-</button>
+                        <input type="number" id="quantity" value="1" min="1" max="5" readonly>
+                        <button class="qty-btn" onclick="updateQuantity(1)">+</button>
+                        <span class="qty-limit">Max 5 per customer</span>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="btn-primary btn-large" onclick="addToCart()">
+                        <i class="fas fa-shopping-cart"></i> Add to Cart
+                    </button>
+                    <button class="btn-secondary btn-large" onclick="buyNow()">
+                        <i class="fas fa-bolt"></i> Buy Now
+                    </button>
+                </div>
+
+                <div class="secondary-actions">
+                    <button class="action-btn" onclick="addToWishlist()">
+                        <i class="fas fa-heart"></i> Add to Wishlist
+                    </button>
+                    <button class="action-btn" onclick="addToCompare()">
+                        <i class="fas fa-exchange-alt"></i> Compare
+                    </button>
+                    <button class="action-btn" onclick="shareProduct()">
+                        <i class="fas fa-share-alt"></i> Share
+                    </button>
+                </div>
+
+                <!-- Coupon Section -->
+                <div class="coupon-section">
+                    <div class="coupon-header">
+                        <i class="fas fa-ticket-alt"></i>
+                        <span>Apply Coupon Code</span>
+                    </div>
+                    <div class="coupon-input">
+                        <input type="text" placeholder="Enter coupon code" id="couponCode">
+                        <button onclick="applyCoupon()">Apply</button>
+                    </div>
+                    <div class="available-coupons">
+                        <span class="coupon-tag" onclick="useCoupon('SAVE10')">SAVE10 - 10% off</span>
+                        <span class="coupon-tag" onclick="useCoupon('FIRST20')">FIRST20 - $20 off</span>
+                    </div>
+                </div>
+
+                <!-- Security Badges -->
+                <div class="security-section">
+                    <div class="security-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Secure Payment</span>
+                    </div>
+                    <div class="security-item">
+                        <i class="fas fa-undo"></i>
+                        <span>7-Day Returns</span>
+                    </div>
+                    <div class="security-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Money Back Guarantee</span>
+                    </div>
+                    <div class="security-item">
+                        <i class="fas fa-certificate"></i>
+                        <span>1 Year Warranty</span>
+                    </div>
+                </div>
+
+                <!-- Seller Info -->
+                <div class="seller-section">
+                    <div class="seller-header">
+                        <div class="seller-avatar">SS</div>
+                        <div class="seller-details">
+                            <h4>Samsung Official Store</h4>
+                            <div class="seller-rating">
+                                <i class="fas fa-star"></i> 4.8 (2,345 reviews)
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-outline">View Store</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Details Tabs -->
+        <div class="product-tabs">
+            <div class="tab-headers">
+                <button class="tab-btn active" onclick="switchTab('description')">Description</button>
+                <button class="tab-btn" onclick="switchTab('specifications')">Specifications</button>
+                <button class="tab-btn" onclick="switchTab('reviews')">Reviews (239)</button>
+                <button class="tab-btn" onclick="switchTab('qna')">Q&A (45)</button>
+            </div>
+
+            <!-- Description Tab -->
+            <div class="tab-content active" id="description">
+                <h2>Product Description</h2>
+                <p>The Samsung Galaxy A53 5G is a powerful mid-range smartphone that delivers exceptional performance and stunning visuals. With its 6.5-inch Super AMOLED display, you'll experience vibrant colors and deep blacks that bring your content to life.</p>
+                
+                <h3>Key Features:</h3>
+                <ul class="feature-list">
+                    <li><i class="fas fa-check"></i> 6.5" Super AMOLED Display with 120Hz refresh rate</li>
+                    <li><i class="fas fa-check"></i> Quad Camera System: 64MP + 12MP + 5MP + 5MP</li>
+                    <li><i class="fas fa-check"></i> 5000mAh Battery with 25W Fast Charging</li>
+                    <li><i class="fas fa-check"></i> 5G Connectivity for ultra-fast speeds</li>
+                    <li><i class="fas fa-check"></i> IP67 Water and Dust Resistance</li>
+                    <li><i class="fas fa-check"></i> Octa-core Processor for smooth multitasking</li>
+                </ul>
+
+                <h3>What's in the Box:</h3>
+                <ul class="feature-list">
+                    <li><i class="fas fa-box"></i> Samsung Galaxy A53 5G</li>
+                    <li><i class="fas fa-box"></i> USB Type-C Cable</li>
+                    <li><i class="fas fa-box"></i> SIM Ejector Tool</li>
+                    <li><i class="fas fa-box"></i> Quick Start Guide</li>
+                </ul>
+            </div>
+
+            <!-- Specifications Tab -->
+            <div class="tab-content" id="specifications">
+                <h2>Technical Specifications</h2>
+                <table class="specs-table">
+                    <tr>
+                        <th>Display</th>
+                        <td>6.5" Super AMOLED, 120Hz, 1080 x 2400 pixels</td>
+                    </tr>
+                    <tr>
+                        <th>Processor</th>
+                        <td>Exynos 1280 Octa-core</td>
+                    </tr>
+                    <tr>
+                        <th>RAM</th>
+                        <td>6GB / 8GB</td>
+                    </tr>
+                    <tr>
+                        <th>Storage</th>
+                        <td>128GB / 256GB (Expandable up to 1TB)</td>
+                    </tr>
+                    <tr>
+                        <th>Rear Camera</th>
+                        <td>64MP (Main) + 12MP (Ultra-wide) + 5MP (Macro) + 5MP (Depth)</td>
+                    </tr>
+                    <tr>
+                        <th>Front Camera</th>
+                        <td>32MP</td>
+                    </tr>
+                    <tr>
+                        <th>Battery</th>
+                        <td>5000mAh with 25W Fast Charging</td>
+                    </tr>
+                    <tr>
+                        <th>OS</th>
+                        <td>Android 12, One UI 4.1</td>
+                    </tr>
+                    <tr>
+                        <th>Connectivity</th>
+                        <td>5G, 4G LTE, Wi-Fi 6, Bluetooth 5.1</td>
+                    </tr>
+                    <tr>
+                        <th>Dimensions</th>
+                        <td>159.6 x 74.8 x 8.1 mm</td>
+                    </tr>
+                    <tr>
+                        <th>Weight</th>
+                        <td>189g</td>
+                    </tr>
+                    <tr>
+                        <th>Water Resistance</th>
+                        <td>IP67</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Reviews Tab -->
+            <div class="tab-content" id="reviews">
+                <div class="reviews-header">
+                    <div class="reviews-summary">
+                        <div class="rating-large">
+                            <span class="rating-number-large">4.6</span>
+                            <div class="stars-large">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p>Based on 239 reviews</p>
+                        </div>
+                        <div class="rating-breakdown">
+                            <div class="rating-bar">
+                                <span>5★</span>
+                                <div class="bar"><div class="fill" style="width: 75%"></div></div>
+                                <span>179</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span>4★</span>
+                                <div class="bar"><div class="fill" style="width: 15%"></div></div>
+                                <span>36</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span>3★</span>
+                                <div class="bar"><div class="fill" style="width: 7%"></div></div>
+                                <span>17</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span>2★</span>
+                                <div class="bar"><div class="fill" style="width: 2%"></div></div>
+                                <span>5</span>
+                            </div>
+                            <div class="rating-bar">
+                                <span>1★</span>
+                                <div class="bar"><div class="fill" style="width: 1%"></div></div>
+                                <span>2</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-primary" onclick="openReviewModal()">Write a Review</button>
+                </div>
+
+                <div class="review-filters">
+                    <button class="filter-btn active">All Reviews</button>
+                    <button class="filter-btn">With Photos</button>
+                    <button class="filter-btn">Verified Purchase</button>
+                    <button class="filter-btn">5 Stars</button>
+                    <button class="filter-btn">4 Stars</button>
+                </div>
+
+                <div class="reviews-list">
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">JD</div>
+                            <div class="reviewer-info">
+                                <div class="reviewer-name">John Doe <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></div>
+                                <div class="review-meta">
+                                    <div class="stars-small">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="review-date">2 days ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>Amazing phone! The camera quality is outstanding and the battery lasts all day. Highly recommend for anyone looking for a reliable mid-range phone.</p>
+                            <div class="review-images">
+                                <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=100" alt="Review photo">
+                                <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=100" alt="Review photo">
+                            </div>
+                        </div>
+                        <div class="review-actions">
+                            <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful (24)</button>
+                            <button class="report-btn"><i class="fas fa-flag"></i> Report</button>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <div class="reviewer-avatar">SM</div>
+                            <div class="reviewer-info">
+                                <div class="reviewer-name">Sarah Miller <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></div>
+                                <div class="review-meta">
+                                    <div class="stars-small">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="far fa-star"></i>
+                                    </div>
+                                    <span class="review-date">1 week ago</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="review-content">
+                            <p>Great value for money. The display is beautiful and performance is smooth. Only downside is no charger in the box.</p>
+                        </div>
+                        <div class="review-actions">
+                            <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful (12)</button>
+                            <button class="report-btn"><i class="fas fa-flag"></i> Report</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-outline btn-block">Load More Reviews</button>
+            </div>
+
+            <!-- Q&A Tab -->
+            <div class="tab-content" id="qna">
+                <div class="qna-header">
+                    <h2>Questions & Answers</h2>
+                    <button class="btn-primary" onclick="askQuestion()">Ask a Question</button>
+                </div>
+
+                <div class="qna-list">
+                    <div class="qna-item">
+                        <div class="question">
+                            <i class="fas fa-question-circle"></i>
+                            <div>
+                                <h4>Does this phone support wireless charging?</h4>
+                                <span class="qna-meta">Asked by Mike T. • 3 days ago</span>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <i class="fas fa-comment-dots"></i>
+                            <div>
+                                <p>No, the Samsung Galaxy A53 5G does not support wireless charging. However, it does support 25W fast charging via USB-C.</p>
+                                <span class="qna-meta">Answered by Samsung Official • 2 days ago</span>
+                                <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful (15)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qna-item">
+                        <div class="question">
+                            <i class="fas fa-question-circle"></i>
+                            <div>
+                                <h4>Is the 128GB model expandable?</h4>
+                                <span class="qna-meta">Asked by Lisa K. • 1 week ago</span>
+                            </div>
+                        </div>
+                        <div class="answer">
+                            <i class="fas fa-comment-dots"></i>
+                            <div>
+                                <p>Yes! The phone has a dedicated microSD card slot that supports up to 1TB of additional storage.</p>
+                                <span class="qna-meta">Answered by Samsung Official • 1 week ago</span>
+                                <button class="helpful-btn"><i class="fas fa-thumbs-up"></i> Helpful (28)</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-outline btn-block">Load More Questions</button>
+            </div>
+        </div>
+
+        <!-- Related Products -->
+        <div class="related-products">
+            <h2>You May Also Like</h2>
+            <div class="products-grid" id="relatedProducts"></div>
+        </div>
+
+        <!-- Recently Viewed -->
+        <div class="recently-viewed">
+            <h2>Recently Viewed</h2>
+            <div class="products-grid" id="recentlyViewed"></div>
+        </div>
+    </div>
+
+    <!-- Sticky Mobile Bar -->
+    <div class="mobile-sticky-bar">
+        <div class="mobile-price">
+            <span class="mobile-price-label">Price:</span>
+            <span class="mobile-price-value">$299.00</span>
+        </div>
+        <div class="mobile-actions">
+            <button class="btn-primary-mobile" onclick="addToCart()">
+                <i class="fas fa-shopping-cart"></i> Add to Cart
+            </button>
+            <button class="btn-secondary-mobile" onclick="buyNow()">Buy Now</button>
+        </div>
+    </div>
+
+    <!-- Fullscreen Image Modal -->
+    <div class="fullscreen-modal" id="fullscreenModal">
+        <button class="modal-close" onclick="closeFullscreen()">&times;</button>
+        <button class="modal-nav prev" onclick="navigateImage(-1)">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <img src="" alt="Fullscreen" id="fullscreenImage">
+        <button class="modal-nav next" onclick="navigateImage(1)">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="modal-thumbnails" id="modalThumbnails"></div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-content">
+            <h3>Share this product</h3>
+            <div class="share-buttons">
+                <button class="share-btn whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+                <button class="share-btn facebook"><i class="fab fa-facebook"></i> Facebook</button>
+                <button class="share-btn twitter"><i class="fab fa-twitter"></i> Twitter</button>
+                <button class="share-btn pinterest"><i class="fab fa-pinterest"></i> Pinterest</button>
+            </div>
+            <div class="copy-link">
+                <input type="text" value="https://shophub.com/product/samsung-a53" readonly>
+                <button onclick="copyLink()">Copy</button>
+            </div>
+            <button class="modal-close-btn" onclick="closeShareModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="product.js"></script>
+</body>
+</html>

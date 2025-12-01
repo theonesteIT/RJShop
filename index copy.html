@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Your Modern Shopping Destination</title>
+    <link rel="stylesheet" href="ecommerce.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Welcome Popup -->
+    <div id="welcomePopup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closeWelcomePopup()">&times;</button>
+            <div class="popup-header">
+                <i class="fas fa-gift"></i>
+                <h2>Welcome to ShopHub!</h2>
+            </div>
+            <p>Get <strong>20% OFF</strong> on your first purchase</p>
+            <div class="coupon-code">WELCOME20</div>
+            <button class="btn-primary" onclick="closeWelcomePopup()">Start Shopping</button>
+        </div>
+    </div>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>ShopHub</span>
+                </div>
+            </div>
+
+            <div class="nav-center">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search for products..." oninput="showSearchSuggestions()">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <div class="nav-links desktop-only">
+                    <a href="#home">Home</a>
+                    <a href="#shop">Shop</a>
+                    <a href="#categories">Categories</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+
+                <div class="nav-icons">
+                    <button class="icon-btn language-btn" onclick="toggleLanguage()">
+                        <i class="fas fa-globe"></i>
+                        <span class="desktop-only">EN</span>
+                    </button>
+                    <button class="icon-btn theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="icon-btn" onclick="toggleWishlist()">
+                        <i class="fas fa-heart"></i>
+                        <span class="badge" id="wishlistCount">0</span>
+                    </button>
+                    <button class="icon-btn" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="badge" id="cartCount">0</span>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#categories">Categories</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="close-btn" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotal">$0.00</span>
+    </div>
+    <button class="btn-primary btn-block" onclick="goToCheckout()">Checkout</button>
+</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <div class="hero-content">
+                    <h1 class="animate-fade-in">Shop the Latest Trends at Great Prices</h1>
+                    <p class="animate-fade-in delay-1">Discover amazing deals on fashion, electronics, and more</p>
+                    <div class="hero-buttons animate-fade-in delay-2">
+                        <button class="btn-primary btn-lg">Shop Now</button>
+                        <button class="btn-secondary btn-lg">View Deals</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="hero-gradient"></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-indicators">
+            <span class="indicator active"></span>
+            <span class="indicator"></span>
+            <span class="indicator"></span>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section categories" id="categories">
+        <div class="container">
+            <div class="section-header">
+                <h2>Shop by Category</h2>
+                <p>Explore our wide range of products</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card animate-slide-up">
+                    <div class="category-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Fashion</h3>
+                    <p>5,234 items</p>
+                </div>
+                <div class="category-card animate-slide-up delay-1">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Electronics</h3>
+                    <p>3,891 items</p>
+                </div>
+                <div class="category-card animate-slide-up delay-2">
+                    <div class="category-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3>Home & Furniture</h3>
+                    <p>2,456 items</p>
+                </div>
+                <div class="category-card animate-slide-up delay-3">
+                    <div class="category-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>Beauty</h3>
+                    <p>1,789 items</p>
+                </div>
+                <div class="category-card animate-slide-up">
+                    <div class="category-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Kids</h3>
+                    <p>2,103 items</p>
+                </div>
+                <div class="category-card animate-slide-up delay-1">
+                    <div class="category-icon">
+                        <i class="fas fa-football-ball"></i>
+                    </div>
+                    <h3>Sports</h3>
+                    <p>1,567 items</p>
+                </div>
+                <div class="category-card animate-slide-up delay-2">
+                    <div class="category-icon">
+                        <i class="fas fa-watch"></i>
+                    </div>
+                    <h3>Accessories</h3>
+                    <p>3,234 items</p>
+                </div>
+                <div class="category-card animate-slide-up delay-3">
+                    <div class="category-icon">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </div>
+                    <h3>More</h3>
+                    <p>View all</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flash Sales -->
+    <section class="section flash-sales">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2><i class="fas fa-bolt"></i> Flash Sales</h2>
+                    <p>Hurry! Limited time offers</p>
+                </div>
+                <div class="countdown" id="countdown">
+                    <div class="countdown-item">
+                        <span id="hours">23</span>
+                        <small>Hours</small>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="minutes">45</span>
+                        <small>Min</small>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="seconds">30</span>
+                        <small>Sec</small>
+                    </div>
+                </div>
+            </div>
+            <div class="products-carousel">
+                <button class="carousel-btn prev" onclick="scrollCarousel('flash', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="products-slider" id="flashProducts"></div>
+                <button class="carousel-btn next" onclick="scrollCarousel('flash', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="section featured-products" id="shop">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <p>Handpicked items just for you</p>
+            </div>
+            <div class="products-grid" id="featuredProducts"></div>
+        </div>
+    </section>
+
+    <!-- Promotional Banners -->
+    <section class="section promo-banners">
+        <div class="container">
+            <div class="promo-grid">
+                <div class="promo-banner banner-1">
+                    <div class="promo-content">
+                        <h3>Electronics Sale</h3>
+                        <p>Up to 50% Off</p>
+                        <button class="btn-secondary">Shop Now</button>
+                    </div>
+                </div>
+                <div class="promo-banner banner-2">
+                    <div class="promo-content">
+                        <h3>Fashion Trends 2025</h3>
+                        <p>New Collection</p>
+                        <button class="btn-secondary">Explore</button>
+                    </div>
+                </div>
+                <div class="promo-banner banner-3">
+                    <div class="promo-content">
+                        <h3>Buy 1 Get 1 Free</h3>
+                        <p>On Selected Items</p>
+                        <button class="btn-secondary">Grab Deal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="section new-arrivals">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-sparkles"></i> New Arrivals</h2>
+                <p>Just landed in store</p>
+            </div>
+            <div class="products-carousel">
+                <button class="carousel-btn prev" onclick="scrollCarousel('new', -1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="products-slider" id="newProducts"></div>
+                <button class="carousel-btn next" onclick="scrollCarousel('new', 1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Sellers -->
+    <section class="section best-sellers">
+        <div class="container">
+            <div class="section-header">
+                <h2><i class="fas fa-fire"></i> Best Sellers</h2>
+                <p>Most loved by customers</p>
+            </div>
+            <div class="products-grid" id="bestProducts"></div>
+        </div>
+    </section>
+
+    <!-- Brand Logos -->
+    <section class="section brands">
+        <div class="container">
+            <div class="brands-slider" id="brandsSlider">
+                <div class="brand-item">Samsung</div>
+                <div class="brand-item">Apple</div>
+                <div class="brand-item">Nike</div>
+                <div class="brand-item">Adidas</div>
+                <div class="brand-item">Sony</div>
+                <div class="brand-item">LG</div>
+                <div class="brand-item">Puma</div>
+                <div class="brand-item">HP</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="section reviews">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Customers Say</h2>
+                <p>Real reviews from real people</p>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Amazing quality and fast delivery! I'm absolutely satisfied with my purchase."</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">JD</div>
+                        <div>
+                            <strong>John Doe</strong>
+                            <small>United States</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Great prices and excellent customer service. Highly recommend!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">SM</div>
+                        <div>
+                            <strong>Sarah Miller</strong>
+                            <small>Canada</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="review-stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"Best online shopping experience I've had. Will definitely shop again!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">MJ</div>
+                        <div>
+                            <strong>Michael Johnson</strong>
+                            <small>United Kingdom</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section benefits">
+        <div class="container">
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <i class="fas fa-shipping-fast"></i>
+                    <h3>Fast Delivery</h3>
+                    <p>2-3 days shipping</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-lock"></i>
+                    <h3>Secure Payment</h3>
+                    <p>100% protected</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Always here to help</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-undo"></i>
+                    <h3>Easy Returns</h3>
+                    <p>30-day guarantee</p>
+                </div>
+                <div class="benefit-item">
+                    <i class="fas fa-certificate"></i>
+                    <h3>Quality Guaranteed</h3>
+                    <p>100% authentic</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="section newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <div class="newsletter-text">
+                    <h2>Subscribe to Our Newsletter</h2>
+                    <p>Get exclusive discounts and be the first to know about new products</p>
+                    <small><i class="fas fa-shield-alt"></i> We promise no spam</small>
+                </div>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address">
+                    <button class="btn-primary">Subscribe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Download -->
+    <section class="section app-download">
+        <div class="container">
+            <div class="app-content">
+                <div class="app-text">
+                    <h2>Download Our Mobile App</h2>
+                    <p>Shop on the go with our mobile app. Get exclusive app-only deals!</p>
+                    <div class="app-badges">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Google Play">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" alt="App Store">
+                    </div>
+                </div>
+                <div class="app-mockup">
+                    <div class="phone-frame">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>ShopHub</span>
+                    </div>
+                    <p>Your trusted online shopping destination for quality products at great prices.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>My Account</h4>
+                    <ul>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Shopping Cart</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> support@shophub.com</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Shop Street, City, Country</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <p>&copy; 2025 ShopHub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="ecommerce.js"></script>
+</body>
+</html>

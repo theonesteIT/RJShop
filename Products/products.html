@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products - ShopHub | Browse Our Complete Collection</title>
+    <meta name="description" content="Browse all products from ShopHub. Filter by category, price, brand, and more. Free shipping on orders over $50.">
+    <link rel="stylesheet" href="products.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                <span>ShopHub</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search products..." id="mainSearch">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="nav-icons">
+                <button class="icon-btn"><i class="fas fa-heart"></i><span class="badge">3</span></button>
+                <button class="icon-btn"><i class="fas fa-shopping-cart"></i><span class="badge">2</span></button>
+                <button class="icon-btn"><i class="fas fa-user"></i></button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="container">
+            <a href="#"><i class="fas fa-home"></i> Home</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Shop</span>
+        </div>
+    </div>
+
+    <!-- Promo Banner -->
+    <div class="promo-banner">
+        <div class="container">
+            <i class="fas fa-fire"></i>
+            <span>Today Only: Up to 30% Off Electronics</span>
+            <button class="btn-promo">Shop Now</button>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>All Products</h1>
+            <p>Browse all items from our store</p>
+        </div>
+    </div>
+
+    <!-- Quick Filters (Top Tags) -->
+    <div class="quick-filters">
+        <div class="container">
+            <button class="filter-tag active" data-filter="all">All Products</button>
+            <button class="filter-tag" data-filter="trending"><i class="fas fa-fire"></i> Trending</button>
+            <button class="filter-tag" data-filter="new"><i class="fas fa-star"></i> New Arrivals</button>
+            <button class="filter-tag" data-filter="bestseller"><i class="fas fa-trophy"></i> Best Sellers</button>
+            <button class="filter-tag" data-filter="under50"><i class="fas fa-dollar-sign"></i> Under $50</button>
+            <button class="filter-tag" data-filter="free-shipping"><i class="fas fa-truck"></i> Free Shipping</button>
+        </div>
+    </div>
+
+    <!-- Brand Showcase -->
+    <div class="brand-showcase">
+        <div class="container">
+            <div class="brand-slider" id="brandSlider">
+                <div class="brand-item" data-brand="Samsung">
+                    <img src="https://via.placeholder.com/100x50/667eea/ffffff?text=Samsung" alt="Samsung">
+                </div>
+                <div class="brand-item" data-brand="Apple">
+                    <img src="https://via.placeholder.com/100x50/764ba2/ffffff?text=Apple" alt="Apple">
+                </div>
+                <div class="brand-item" data-brand="Nike">
+                    <img src="https://via.placeholder.com/100x50/f093fb/ffffff?text=Nike" alt="Nike">
+                </div>
+                <div class="brand-item" data-brand="Adidas">
+                    <img src="https://via.placeholder.com/100x50/4facfe/ffffff?text=Adidas" alt="Adidas">
+                </div>
+                <div class="brand-item" data-brand="Sony">
+                    <img src="https://via.placeholder.com/100x50/00f2fe/ffffff?text=Sony" alt="Sony">
+                </div>
+                <div class="brand-item" data-brand="LG">
+                    <img src="https://via.placeholder.com/100x50/43e97b/ffffff?text=LG" alt="LG">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="shop-layout">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar" id="filtersSidebar">
+                <div class="filters-header">
+                    <h3>Filters</h3>
+                    <button class="clear-filters" id="clearFilters">Clear All</button>
+                </div>
+
+                <!-- Active Filters Summary -->
+                <div class="active-filters" id="activeFilters"></div>
+
+                <!-- Search within products -->
+                <div class="filter-section">
+                    <div class="filter-search">
+                        <input type="text" placeholder="Search within results..." id="filterSearch">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+
+                <!-- Categories Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        Categories
+                        <i class="fas fa-chevron-down"></i>
+                    </h4>
+                    <div class="filter-content">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="category" value="electronics">
+                            <span>Electronics</span>
+                            <span class="count">(234)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="category" value="fashion">
+                            <span>Fashion</span>
+                            <span class="count">(456)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="category" value="home">
+                            <span>Home & Furniture</span>
+                            <span class="count">(189)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="category" value="beauty">
+                            <span>Beauty</span>
+                            <span class="count">(345)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="category" value="sports">
+                            <span>Sports</span>
+                            <span class="count">(267)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="category" value="kids">
+                            <span>Kids</span>
+                            <span class="count">(198)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Price Range Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        Price Range
+                        <i class="fas fa-chevron-down"></i>
+                    </h4>
+                    <div class="filter-content">
+                        <div class="price-inputs">
+                            <input type="number" id="minPrice" placeholder="Min" value="0">
+                            <span>—</span>
+                            <input type="number" id="maxPrice" placeholder="Max" value="1000">
+                        </div>
+                        <input type="range" id="priceRange" class="price-slider" min="0" max="1000" value="1000">
+                        <div class="price-labels">
+                            <span>$0</span>
+                            <span>$1000+</span>
+                        </div>
+                        <button class="btn-apply" id="applyPrice">Apply</button>
+                    </div>
+                </div>
+
+                <!-- Brand Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        Brand
+                        <i class="fas fa-chevron-down"></i>
+                    </h4>
+                    <div class="filter-content">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="brand" value="samsung">
+                            <span>Samsung</span>
+                            <span class="count">(45)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="brand" value="apple">
+                            <span>Apple</span>
+                            <span class="count">(38)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="brand" value="nike">
+                            <span>Nike</span>
+                            <span class="count">(67)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="brand" value="adidas">
+                            <span>Adidas</span>
+                            <span class="count">(52)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="brand" value="sony">
+                            <span>Sony</span>
+                            <span class="count">(29)</span>
+                        </label>
+                        <button class="show-more">Show More <i class="fas fa-chevron-down"></i></button>
+                    </div>
+                </div>
+
+                <!-- Rating Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        Customer Rating
+                        <i class="fas fa-chevron-down"></i>
+                    </h4>
+                    <div class="filter-content">
+                        <label class="filter-checkbox rating-filter">
+                            <input type="radio" name="rating" value="5">
+                            <span class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </span>
+                            <span>& Up</span>
+                        </label>
+                        <label class="filter-checkbox rating-filter">
+                            <input type="radio" name="rating" value="4">
+                            <span class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                            <span>& Up</span>
+                        </label>
+                        <label class="filter-checkbox rating-filter">
+                            <input type="radio" name="rating" value="3">
+                            <span class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </span>
+                            <span>& Up</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Color Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        Color
+                        <i class="fas fa-chevron-down"></i>
+                    </h4>
+                    <div class="filter-content">
+                        <div class="color-filters">
+                            <label class="color-option" title="Black">
+                                <input type="checkbox" name="color" value="black">
+                                <span style="background: #000000;"></span>
+                            </label>
+                            <label class="color-option" title="White">
+                                <input type="checkbox" name="color" value="white">
+                                <span style="background: #FFFFFF; border: 1px solid #ddd;"></span>
+                            </label>
+                            <label class="color-option" title="Red">
+                                <input type="checkbox" name="color" value="red">
+                                <span style="background: #e74c3c;"></span>
+                            </label>
+                            <label class="color-option" title="Blue">
+                                <input type="checkbox" name="color" value="blue">
+                                <span style="background: #3498db;"></span>
+                            </label>
+                            <label class="color-option" title="Green">
+                                <input type="checkbox" name="color" value="green">
+                                <span style="background: #27ae60;"></span>
+                            </label>
+                            <label class="color-option" title="Yellow">
+                                <input type="checkbox" name="color" value="yellow">
+                                <span style="background: #f39c12;"></span>
+                            </label>
+                            <label class="color-option" title="Pink">
+                                <input type="checkbox" name="color" value="pink">
+                                <span style="background: #ff69b4;"></span>
+                            </label>
+                            <label class="color-option" title="Gray">
+                                <input type="checkbox" name="color" value="gray">
+                                <span style="background: #95a5a6;"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Size Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        Size
+                        <i class="fas fa-chevron-down"></i>
+                    </h4>
+                    <div class="filter-content">
+                        <div class="size-filters">
+                            <label class="size-option">
+                                <input type="checkbox" name="size" value="xs">
+                                <span>XS</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="checkbox" name="size" value="s">
+                                <span>S</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="checkbox" name="size" value="m">
+                                <span>M</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="checkbox" name="size" value="l">
+                                <span>L</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="checkbox" name="size" value="xl">
+                                <span>XL</span>
+                            </label>
+                            <label class="size-option">
+                                <input type="checkbox" name="size" value="xxl">
+                                <span>XXL</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Availability Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        Availability
+                        <i class="fas fa-chevron-down"></i>
+                    </h4>
+                    <div class="filter-content">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="availability" value="in-stock">
+                            <span>In Stock</span>
+                            <span class="count">(1,234)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="availability" value="out-of-stock">
+                            <span>Out of Stock</span>
+                            <span class="count">(45)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Discount Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        Discount
+                        <i class="fas fa-chevron-down"></i>
+                    </h4>
+                    <div class="filter-content">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="discount" value="10">
+                            <span>10% or more</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="discount" value="20">
+                            <span>20% or more</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="discount" value="50">
+                            <span>50% or more</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="discount" value="flash">
+                            <span>Flash Sale</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Shipping Filter -->
+                <div class="filter-section">
+                    <h4 class="filter-title">
+                        Shipping
+                        <i class="fas fa-chevron-down"></i>
+                    </h4>
+                    <div class="filter-content">
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="shipping" value="free">
+                            <span>Free Shipping</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="shipping" value="fast">
+                            <span>Fast Delivery</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" name="shipping" value="cod">
+                            <span>Cash on Delivery</span>
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Products Section -->
+            <div class="products-section">
+                <!-- Top Bar -->
+                <div class="products-topbar">
+                    <button class="mobile-filter-btn" id="mobileFilterBtn">
+                        <i class="fas fa-filter"></i> Filters
+                    </button>
+                    
+                    <div class="results-info">
+                        <span id="resultsCount">Showing 1–12 of 150 products</span>
+                    </div>
+
+                    <div class="topbar-controls">
+                        <select id="sortBy">
+                            <option value="default">Default sorting</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest First</option>
+                            <option value="bestselling">Best Selling</option>
+                            <option value="rating">Customer Rating</option>
+                        </select>
+
+                        <select id="itemsPerPage">
+                            <option value="12">Show 12</option>
+                            <option value="24">Show 24</option>
+                            <option value="48">Show 48</option>
+                        </select>
+
+                        <div class="layout-switch">
+                            <button class="layout-btn active" data-layout="grid">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="layout-btn" data-layout="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Grid -->
+                <div class="products-container grid-view" id="productsContainer">
+                    <!-- Products will be loaded here by JavaScript -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination" id="pagination">
+                    <button class="page-btn" id="prevPage">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <div class="page-numbers" id="pageNumbers"></div>
+                    <button class="page-btn" id="nextPage">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Load More Button -->
+                <div class="load-more-container">
+                    <button class="btn-load-more" id="loadMoreBtn">
+                        <i class="fas fa-sync-alt"></i> Load More Products
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recently Viewed -->
+        <div class="recently-viewed">
+            <h2>Recently Viewed</h2>
+            <div class="products-slider" id="recentlyViewed"></div>
+        </div>
+    </div>
+
+    <!-- Compare Panel -->
+    <div class="compare-panel" id="comparePanel">
+        <div class="compare-header">
+            <h4>Compare Products (<span id="compareCount">0</span>/4)</h4>
+            <button id="closeCompare"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="compare-items" id="compareItems"></div>
+        <button class="btn-compare" id="goToCompare">Compare Now</button>
+    </div>
+
+    <!-- Quick View Modal -->
+    <div class="quick-view-modal" id="quickViewModal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="closeQuickView">&times;</button>
+            <div id="quickViewContent"></div>
+        </div>
+    </div>
+
+    <!-- Mobile Filter Overlay -->
+    <div class="mobile-filter-overlay" id="mobileFilterOverlay"></div>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Loading Skeleton -->
+    <div class="loading-skeleton" id="loadingSkeleton">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+    </div>
+
+    <script src="products.js"></script>
+</body>
+</html>

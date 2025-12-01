@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopHub - Your Modern Shopping Destination</title>
+    <link rel="stylesheet" href="ecommerce.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Top Contact Bar -->
+    <div class="top-contact-bar">
+        <div class="top-contact-content">
+            <div class="contact-items">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <a href="tel:+250788123456">+250 788 123 456</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <a href="mailto:support@shophub.rw">support@shophub.rw</a>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Kigali, Rwanda</span>
+                </div>
+            </div>
+            <div class="top-social">
+                <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Popup -->
+    <div id="welcomePopup" class="popup-overlay">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closeWelcomePopup()">&times;</button>
+            <div class="popup-header">
+                <i class="fas fa-gift"></i>
+                <h2>Welcome to ShopHub!</h2>
+            </div>
+            <p>Get <strong>20% OFF</strong> on your first purchase</p>
+            <div class="coupon-code">WELCOME20</div>
+            <button class="btn-primary" onclick="closeWelcomePopup()">Start Shopping</button>
+        </div>
+    </div>
+
+    <!-- Sticky Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>ShopHub</span>
+                </div>
+            </div>
+
+            <div class="nav-center">
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search for products..." oninput="showSearchSuggestions()">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+            </div>
+
+            <div class="nav-right">
+                <div class="nav-links desktop-only">
+                    <a href="#home">Home</a>
+                    <a href="#shop">Shop</a>
+                    <a href="#about">About</a>
+                    <a href="#contact">Contact</a>
+                </div>
+
+                <div class="nav-icons">
+                    <button class="icon-btn theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="icon-btn" onclick="toggleWishlist()">
+                        <i class="fas fa-heart"></i>
+                        <span class="badge" id="wishlistCount">0</span>
+                    </button>
+                    <button class="icon-btn" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="badge" id="cartCount">0</span>
+                    </button>
+                    <button class="icon-btn">
+                        <i class="fas fa-user"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="close-btn" onclick="toggleCart()">&times;</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn-primary btn-block" onclick="goToCheckout()">Checkout</button>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide active">
+                <div class="hero-content">
+                    <h1 class="animate-fade-in">Shop the Latest Trends at Great Prices</h1>
+                    <p class="animate-fade-in delay-1">Discover amazing deals on fashion, electronics, and more</p>
+                    <div class="hero-buttons animate-fade-in delay-2">
+                        <button class="btn-primary btn-lg">Shop Now</button>
+                        <button class="btn-secondary btn-lg">View Deals</button>
+                    </div>
+                </div>
+                <div class="hero-image" id="heroImage"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Area with Sidebar -->
+    <div class="main-layout">
+        <!-- Left Sidebar Categories -->
+        <aside class="category-sidebar" id="categorySidebar">
+            <div class="sidebar-header">
+                <h3><i class="fas fa-th-large"></i> Shop by Category</h3>
+                <button class="sidebar-close" onclick="toggleSidebar()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="category-list">
+                <!-- Electronics -->
+                <div class="category-item">
+                    <div class="category-title" onclick="toggleCategoryDropdown('electronics')">
+                        <div class="cat-title-left">
+                            <i class="fas fa-laptop"></i>
+                            <span>Electronics</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    <div class="category-dropdown" id="electronics">
+                        <a href="#" onclick="filterProducts('Smartphones')">Smartphones</a>
+                        <a href="#" onclick="filterProducts('Laptops')">Laptops</a>
+                        <a href="#" onclick="filterProducts('Headphones')">Headphones</a>
+                        <a href="#" onclick="filterProducts('Cameras')">Cameras</a>
+                        <a href="#" onclick="filterProducts('Smart Watch')">Smart Watches</a>
+                        <a href="#" onclick="filterProducts('Accessories')">Accessories</a>
+                    </div>
+                </div>
+
+                <!-- Fashion -->
+                <div class="category-item">
+                    <div class="category-title" onclick="toggleCategoryDropdown('fashion')">
+                        <div class="cat-title-left">
+                            <i class="fas fa-tshirt"></i>
+                            <span>Fashion</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    <div class="category-dropdown" id="fashion">
+                        <a href="#" onclick="filterProducts('Men Clothing')">Men's Clothing</a>
+                        <a href="#" onclick="filterProducts('Women Clothing')">Women's Clothing</a>
+                        <a href="#" onclick="filterProducts('Shoes')">Shoes</a>
+                        <a href="#" onclick="filterProducts('Bags')">Bags</a>
+                        <a href="#" onclick="filterProducts('Jewelry')">Jewelry</a>
+                    </div>
+                </div>
+
+                <!-- Home & Furniture -->
+                <div class="category-item">
+                    <div class="category-title" onclick="toggleCategoryDropdown('home')">
+                        <div class="cat-title-left">
+                            <i class="fas fa-couch"></i>
+                            <span>Home & Furniture</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    <div class="category-dropdown" id="home">
+                        <a href="#" onclick="filterProducts('Living Room')">Living Room</a>
+                        <a href="#" onclick="filterProducts('Bedroom')">Bedroom</a>
+                        <a href="#" onclick="filterProducts('Kitchen')">Kitchen</a>
+                        <a href="#" onclick="filterProducts('Decor')">Home Decor</a>
+                        <a href="#" onclick="filterProducts('Appliances')">Appliances</a>
+                    </div>
+                </div>
+
+                <!-- Beauty & Health -->
+                <div class="category-item">
+                    <div class="category-title" onclick="toggleCategoryDropdown('beauty')">
+                        <div class="cat-title-left">
+                            <i class="fas fa-spa"></i>
+                            <span>Beauty & Health</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    <div class="category-dropdown" id="beauty">
+                        <a href="#" onclick="filterProducts('Skincare')">Skincare</a>
+                        <a href="#" onclick="filterProducts('Makeup')">Makeup</a>
+                        <a href="#" onclick="filterProducts('Hair Care')">Hair Care</a>
+                        <a href="#" onclick="filterProducts('Fragrance')">Fragrance</a>
+                        <a href="#" onclick="filterProducts('Health')">Health Products</a>
+                    </div>
+                </div>
+
+                <!-- Sports & Outdoors -->
+                <div class="category-item">
+                    <div class="category-title" onclick="toggleCategoryDropdown('sports')">
+                        <div class="cat-title-left">
+                            <i class="fas fa-football-ball"></i>
+                            <span>Sports & Outdoors</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    <div class="category-dropdown" id="sports">
+                        <a href="#" onclick="filterProducts('Exercise')">Exercise Equipment</a>
+                        <a href="#" onclick="filterProducts('Sports Wear')">Sports Wear</a>
+                        <a href="#" onclick="filterProducts('Outdoor')">Outdoor Gear</a>
+                        <a href="#" onclick="filterProducts('Cycling')">Cycling</a>
+                        <a href="#" onclick="filterProducts('Fitness')">Fitness Accessories</a>
+                    </div>
+                </div>
+
+                <!-- Kids & Toys -->
+                <div class="category-item">
+                    <div class="category-title" onclick="toggleCategoryDropdown('kids')">
+                        <div class="cat-title-left">
+                            <i class="fas fa-child"></i>
+                            <span>Kids & Toys</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    <div class="category-dropdown" id="kids">
+                        <a href="#" onclick="filterProducts('Toys')">Toys</a>
+                        <a href="#" onclick="filterProducts('Kids Clothing')">Kids Clothing</a>
+                        <a href="#" onclick="filterProducts('Baby Products')">Baby Products</a>
+                        <a href="#" onclick="filterProducts('School')">School Supplies</a>
+                        <a href="#" onclick="filterProducts('Games')">Games</a>
+                    </div>
+                </div>
+
+                <!-- Books & Media -->
+                <div class="category-item">
+                    <div class="category-title" onclick="toggleCategoryDropdown('books')">
+                        <div class="cat-title-left">
+                            <i class="fas fa-book"></i>
+                            <span>Books & Media</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    <div class="category-dropdown" id="books">
+                        <a href="#" onclick="filterProducts('Books')">Books</a>
+                        <a href="#" onclick="filterProducts('Movies')">Movies & Music</a>
+                        <a href="#" onclick="filterProducts('Magazines')">Magazines</a>
+                        <a href="#" onclick="filterProducts('E-books')">E-books</a>
+                    </div>
+                </div>
+
+                <!-- Automotive -->
+                <div class="category-item">
+                    <div class="category-title" onclick="toggleCategoryDropdown('automotive')">
+                        <div class="cat-title-left">
+                            <i class="fas fa-car"></i>
+                            <span>Automotive</span>
+                        </div>
+                        <i class="fas fa-chevron-down dropdown-icon"></i>
+                    </div>
+                    <div class="category-dropdown" id="automotive">
+                        <a href="#" onclick="filterProducts('Car Parts')">Car Parts</a>
+                        <a href="#" onclick="filterProducts('Accessories')">Car Accessories</a>
+                        <a href="#" onclick="filterProducts('Tools')">Tools</a>
+                        <a href="#" onclick="filterProducts('Car Care')">Car Care</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Mobile Sidebar Toggle -->
+        <button class="sidebar-toggle-btn mobile-only" onclick="toggleSidebar()">
+            <i class="fas fa-bars"></i> Categories
+        </button>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Flash Sales -->
+            <section class="section flash-sales">
+                <div class="section-header">
+                    <div>
+                        <h2><i class="fas fa-bolt"></i> Flash Sales</h2>
+                        <p>Hurry! Limited time offers</p>
+                    </div>
+                    <div class="countdown" id="countdown">
+                        <div class="countdown-item">
+                            <span id="hours">23</span>
+                            <small>Hours</small>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="minutes">45</span>
+                            <small>Min</small>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="seconds">30</span>
+                            <small>Sec</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="products-carousel">
+                    <button class="carousel-btn prev" onclick="scrollCarousel('flash', -1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="products-slider" id="flashProducts"></div>
+                    <button class="carousel-btn next" onclick="scrollCarousel('flash', 1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Featured Products -->
+            <section class="section featured-products" id="shop">
+                <div class="section-header">
+                    <h2>Featured Products</h2>
+                    <p>Handpicked items just for you</p>
+                </div>
+                <div class="products-grid" id="featuredProducts"></div>
+            </section>
+
+            <!-- Promotional Banners -->
+            <section class="section promo-banners">
+                <div class="promo-grid">
+                    <div class="promo-banner banner-1">
+                        <div class="promo-content">
+                            <h3>Electronics Sale</h3>
+                            <p>Up to 50% Off</p>
+                            <button class="btn-secondary">Shop Now</button>
+                        </div>
+                    </div>
+                    <div class="promo-banner banner-2">
+                        <div class="promo-content">
+                            <h3>Fashion Trends 2025</h3>
+                            <p>New Collection</p>
+                            <button class="btn-secondary">Explore</button>
+                        </div>
+                    </div>
+                    <div class="promo-banner banner-3">
+                        <div class="promo-content">
+                            <h3>Buy 1 Get 1 Free</h3>
+                            <p>On Selected Items</p>
+                            <button class="btn-secondary">Grab Deal</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- New Arrivals -->
+            <section class="section new-arrivals">
+                <div class="section-header">
+                    <h2><i class="fas fa-sparkles"></i> New Arrivals</h2>
+                    <p>Just landed in store</p>
+                </div>
+                <div class="products-carousel">
+                    <button class="carousel-btn prev" onclick="scrollCarousel('new', -1)">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="products-slider" id="newProducts"></div>
+                    <button class="carousel-btn next" onclick="scrollCarousel('new', 1)">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Best Sellers -->
+            <section class="section best-sellers">
+                <div class="section-header">
+                    <h2><i class="fas fa-fire"></i> Best Sellers</h2>
+                    <p>Most loved by customers</p>
+                </div>
+                <div class="products-grid" id="bestProducts"></div>
+            </section>
+
+            <!-- Reviews -->
+            <section class="section reviews">
+                <div class="section-header">
+                    <h2>What Our Customers Say</h2>
+                    <p>Real reviews from real people</p>
+                </div>
+                <div class="reviews-grid">
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Amazing quality and fast delivery! I'm absolutely satisfied with my purchase."</p>
+                        <div class="reviewer">
+                            <div class="reviewer-avatar">JD</div>
+                            <div>
+                                <strong>Jean Claude</strong>
+                                <small>Kigali, Rwanda</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Great prices and excellent customer service. Highly recommend!"</p>
+                        <div class="reviewer">
+                            <div class="reviewer-avatar">AM</div>
+                            <div>
+                                <strong>Aline Mutesi</strong>
+                                <small>Kigali, Rwanda</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>"Best online shopping experience I've had. Will definitely shop again!"</p>
+                        <div class="reviewer">
+                            <div class="reviewer-avatar">PK</div>
+                            <div>
+                                <strong>Patrick Kamanzi</strong>
+                                <small>Kigali, Rwanda</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Why Choose Us -->
+            <section class="section benefits">
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-shipping-fast"></i>
+                        <h3>Fast Delivery</h3>
+                        <p>Same day delivery in Kigali</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-lock"></i>
+                        <h3>Secure Payment</h3>
+                        <p>100% protected</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-headset"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Always here to help</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-undo"></i>
+                        <h3>Easy Returns</h3>
+                        <p>30-day guarantee</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-certificate"></i>
+                        <h3>Quality Guaranteed</h3>
+                        <p>100% authentic</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter -->
+            <section class="section newsletter">
+                <div class="newsletter-content">
+                    <div class="newsletter-text">
+                        <h2>Subscribe to Our Newsletter</h2>
+                        <p>Get exclusive discounts and be the first to know about new products</p>
+                        <small><i class="fas fa-shield-alt"></i> We promise no spam</small>
+                    </div>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Enter your email address" id="newsletterEmail">
+                        <button class="btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>ShopHub</span>
+                    </div>
+                    <p>Your trusted online shopping destination for quality products at great prices in Rwanda.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Return Policy</a></li>
+                        <li><a href="#">Shipping Info</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>My Account</h4>
+                    <ul>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="#">Orders</a></li>
+                        <li><a href="#">Wishlist</a></li>
+                        <li><a href="#">Shopping Cart</a></li>
+                        <li><a href="#">Track Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> support@shophub.rw</li>
+                        <li><i class="fas fa-phone"></i> +250 788 123 456</li>
+                        <li><i class="fas fa-map-marker-alt"></i> KG 123 St, Kigali, Rwanda</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 8AM-8PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <p>&copy; 2025 ShopHub Rwanda. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/250788123456" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="ecommerce.js"></script>
+</body>
+</html>

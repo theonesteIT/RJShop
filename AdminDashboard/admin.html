@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - ShopHub</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="logo">
+                <i class="fas fa-shopping-bag"></i>
+                <span>ShopHub Admin</span>
+            </div>
+            <button class="close-sidebar" onclick="toggleSidebar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="admin.html" class="nav-item active">
+                <i class="fas fa-home"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <i class="fas fa-box"></i>
+                <span>Products</span>
+                <span class="badge">234</span>
+            </a>
+            <a href="add-product.html" class="nav-item">
+                <i class="fas fa-plus-circle"></i>
+                <span>Add Product</span>
+            </a>
+            <a href="orders.html" class="nav-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Orders</span>
+                <span class="badge badge-warning">12</span>
+            </a>
+            <a href="customers.html" class="nav-item">
+                <i class="fas fa-users"></i>
+                <span>Customers</span>
+            </a>
+            <a href="categories.html" class="nav-item">
+                <i class="fas fa-tags"></i>
+                <span>Categories</span>
+            </a>
+            <a href="reviews.html" class="nav-item">
+                <i class="fas fa-star"></i>
+                <span>Reviews</span>
+            </a>
+            <a href="coupons.html" class="nav-item">
+                <i class="fas fa-ticket-alt"></i>
+                <span>Coupons</span>
+            </a>
+            <a href="settings.html" class="nav-item">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+            <a href="reports.html" class="nav-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Reports</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="#" class="nav-item" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Header -->
+        <header class="top-header">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="header-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search products, orders, customers...">
+            </div>
+
+            <div class="header-actions">
+                <button class="header-btn" onclick="toggleTheme()">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="header-btn notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">5</span>
+                </button>
+                <div class="user-profile">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=ff6b35&color=fff" alt="Admin">
+                    <div class="user-info">
+                        <span class="user-name">Admin User</span>
+                        <span class="user-role">Administrator</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+            <div class="page-header">
+                <h1>Dashboard Overview</h1>
+                <div class="page-actions">
+                    <button class="btn btn-secondary">
+                        <i class="fas fa-download"></i> Export Report
+                    </button>
+                    <button class="btn btn-primary" onclick="location.href='add-product.html'">
+                        <i class="fas fa-plus"></i> Add Product
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon revenue">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>$45,231</h3>
+                        <p>Total Revenue</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 12.5%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon sales">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>$8,234</h3>
+                        <p>Today's Sales</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 8.2%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon orders">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>1,423</h3>
+                        <p>Total Orders</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 5.7%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>12</h3>
+                        <p>Pending Orders</p>
+                        <span class="stat-change negative">
+                            <i class="fas fa-arrow-down"></i> 2.3%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon customers">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>8,456</h3>
+                        <p>Total Customers</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 15.3%
+                        </span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon products">
+                        <i class="fas fa-tag"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3>234</h3>
+                        <p>Total Products</p>
+                        <span class="stat-change positive">
+                            <i class="fas fa-arrow-up"></i> 3.1%
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-row">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h3>Sales Overview</h3>
+                        <select class="chart-select">
+                            <option>Last 7 days</option>
+                            <option>Last 30 days</option>
+                            <option>Last 3 months</option>
+                        </select>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="salesChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h3>Order Status</h3>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="orderChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="content-row">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Recent Orders</h3>
+                        <a href="orders.html" class="view-all">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Date</th>
+                                    <th>Total</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentOrdersTable">
+                                <!-- Orders will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Top Selling Products</h3>
+                        <a href="products.html" class="view-all">View All</a>
+                    </div>
+                    <div class="top-products" id="topProducts">
+                        <!-- Products will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alerts & Stock -->
+            <div class="content-row">
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Low Stock Alerts</h3>
+                    </div>
+                    <div class="alert-list" id="lowStockAlerts">
+                        <!-- Alerts will be populated by JS -->
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <div class="card-header">
+                        <h3>Recent Activity</h3>
+                    </div>
+                    <div class="activity-list" id="activityList">
+                        <!-- Activity will be populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="admin-script.js"></script>
+</body>
+</html>
