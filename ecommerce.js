@@ -175,8 +175,164 @@ function setupNavbar() {
 
 function toggleMobileMenu() {
     const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenu.classList.toggle('active');
+    if (!mobileMenu) return;
+    const isActive = mobileMenu.classList.toggle('active');
+    // update aria-expanded for accessibility
+    const btn = document.querySelector('.mobile-menu-btn');
+    if (btn) {
+        btn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+        btn.setAttribute('aria-controls', 'mobileMenu');
+    }
+    // set aria-hidden on the menu
+    mobileMenu.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+    if (isActive) {
+        // focus first link for keyboard users
+        const firstLink = mobileMenu.querySelector('a');
+        if (firstLink) firstLink.focus();
+    } else if (btn) {
+        btn.focus();
+    }
 }
+
+// Close mobile menu automatically when resizing to desktop
+window.addEventListener('resize', () => {
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (!mobileMenu) return;
+    if (window.innerWidth > 992 && mobileMenu.classList.contains('active')) {
+        mobileMenu.classList.remove('active');
+        const btn = document.querySelector('.mobile-menu-btn');
+        if (btn) btn.setAttribute('aria-expanded', 'false');
+    }
+});
+
+/* Mobile search overlay: open/close and suggestions */
+function openMobileSearch() {
+    const overlay = document.getElementById('mobileSearchOverlay');
+    const input = document.getElementById('mobileSearchInput');
+    if (!overlay || !input) return;
+    overlay.classList.add('active');
+    overlay.setAttribute('aria-hidden', 'false');
+    input.focus();
+}
+
+function closeMobileSearch() {
+    const overlay = document.getElementById('mobileSearchOverlay');
+    const toggle = document.getElementById('mobileSearchToggle');
+    if (!overlay) return;
+    overlay.classList.remove('active');
+    overlay.setAttribute('aria-hidden', 'true');
+    if (toggle) toggle.focus();
+}
+
+function performMobileSearch() {
+    const q = document.getElementById('mobileSearchInput').value.trim();
+    if (!q) return;
+    // reuse existing selectSearch behaviour
+    selectSearch(q);
+    closeMobileSearch();
+}
+
+function showMobileSearchSuggestions() {
+    const input = document.getElementById('mobileSearchInput');
+    const suggestionsDiv = document.getElementById('mobileSearchSuggestions');
+    if (!input || !suggestionsDiv) return;
+    const query = input.value.trim().toLowerCase();
+    if (query.length === 0) {
+        suggestionsDiv.classList.remove('active');
+        suggestionsDiv.innerHTML = '';
+        return;
+    }
+    const foundProducts = products.filter(p => p.title.toLowerCase().includes(query)).slice(0,6);
+    const matchingTrending = searchSuggestions.trending.filter(item => item.toLowerCase().includes(query));
+    const matchingCategories = searchSuggestions.categories.filter(item => item.toLowerCase().includes(query));
+
+    let html = '<div class="mobile-search-suggestions">';
+
+    // Product suggestions
+    if (foundProducts.length > 0) {
+        foundProducts.forEach(p => {
+            html += `
+                <div class="suggestion-card" onclick="selectSearchMobile('${p.title.replace(/'/g, "\\'")}')">
+                    <div class="thumb" style="background-image: url('${p.image}')"></div>
+                    <div class="meta">
+                        <div class="title">${p.title}</div>
+                        <div class="sub">${p.category} • ${p.reviews} reviews</div>
+                        <div class="price">Frw ${p.price.toFixed(2)}</div>
+                    </div>
+                    <div class="suggestion-actions">
+                        <button class="action-btn" onclick="event.stopPropagation(); addToCart(${p.id});" title="Add to cart"><i class="fas fa-shopping-cart"></i></button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // Trending / categories chips
+    if (matchingTrending.length > 0 || matchingCategories.length > 0) {
+        html += '<div class="suggestion-section">';
+        if (matchingTrending.length > 0) {
+            html += '<h4>Trending</h4>';
+            html += '<div class="search-chips">';
+            matchingTrending.forEach(item => {
+                html += `<div class="chip" onclick="selectSearchMobile('${item.replace(/'/g, "\\'")}')">${item}</div>`;
+            });
+            html += '</div>';
+        }
+        if (matchingCategories.length > 0) {
+            html += '<h4 style="margin-top:8px">Categories</h4>';
+            html += '<div class="search-chips">';
+            matchingCategories.forEach(item => {
+                html += `<div class="chip" onclick="selectSearchMobile('${item.replace(/'/g, "\\'")}')">${item}</div>`;
+            });
+            html += '</div>';
+        }
+        html += '</div>';
+    }
+
+    // Recent searches
+    if (searchSuggestions.recent && searchSuggestions.recent.length > 0) {
+        html += '<div class="suggestion-section">';
+        html += '<h4>Recent</h4>';
+        html += '<div class="search-chips">';
+        searchSuggestions.recent.slice(0,5).forEach(item => {
+            html += `<div class="chip" onclick="selectSearchMobile('${item.replace(/'/g, "\\'")}')">${item}</div>`;
+        });
+        html += `<div class="chip" onclick="clearRecentSearches()" style="background:transparent;border:1px solid var(--border-color);">Clear</div>`;
+        html += '</div>';
+        html += '</div>';
+    }
+
+    html += '</div>';
+
+    suggestionsDiv.innerHTML = html;
+    suggestionsDiv.classList.add('active');
+}
+
+function clearRecentSearches() {
+    searchSuggestions.recent = [];
+    const suggestionsDiv = document.getElementById('mobileSearchSuggestions');
+    if (suggestionsDiv) {
+        suggestionsDiv.innerHTML = '';
+        suggestionsDiv.classList.remove('active');
+    }
+}
+
+// wire mobile search toggle buttons after DOM loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const openBtn = document.getElementById('mobileSearchToggle');
+    const closeBtn = document.getElementById('mobileSearchClose');
+    if (openBtn) openBtn.addEventListener('click', openMobileSearch);
+    if (closeBtn) closeBtn.addEventListener('click', closeMobileSearch);
+    // allow escape key to close overlay/menu
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const overlay = document.getElementById('mobileSearchOverlay');
+            if (overlay && overlay.classList.contains('active')) closeMobileSearch();
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenu && mobileMenu.classList.contains('active')) toggleMobileMenu();
+        }
+    });
+});
 
 function toggleTheme() {
     isDarkMode = !isDarkMode;
@@ -281,6 +437,12 @@ function selectSearch(query) {
     
     document.getElementById('searchSuggestions').classList.remove('active');
     console.log('Searching for:', query);
+}
+
+// ensure mobile overlay closes when a search is selected
+function selectSearchMobile(query) {
+    selectSearch(query);
+    closeMobileSearch();
 }
 
 // Close search suggestions when clicking outside

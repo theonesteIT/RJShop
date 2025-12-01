@@ -1685,3 +1685,225 @@ padding: 20px;
 .p-40 {
     padding: 40px;
 }
+
+/* Small improvements for mobile responsiveness */
+@media (max-width: 1024px) {
+    .main-layout {
+        flex-direction: column;
+        gap: 16px;
+    }
+    .main-content {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    /* hide the large centered search on narrow screens to free header space */
+    .nav-center { display: none; }
+    .mobile-menu-btn { display: block; }
+    .icon-btn { width: 48px; height: 48px; }
+}
+
+/* Move logo below the top bar on small screens for a more spacious header */
+@media (max-width: 768px) {
+    .nav-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 15px;
+    }
+
+    /* Top row: mobile menu button (left) and icons (right) */
+    .nav-left { order: 1; display: flex; align-items: center; gap: 10px; }
+    .nav-right { order: 1; margin-left: auto; }
+
+    /* Logo becomes full-width on its own row */
+    .logo {
+        order: 2;
+        width: 100%;
+        text-align: center;
+        font-size: 22px;
+        padding: 6px 0;
+        margin: 4px 0;
+    }
+
+    .logo i { font-size: 28px; }
+
+    /* Make touch targets larger and spaced */
+    .nav-icons { gap: 12px; }
+    .mobile-menu-btn { font-size: 22px; }
+}
+
+@media (max-width: 480px) {
+    /* reduce top-bar clutter on very small screens */
+    .top-contact-bar { display: none; }
+    .hero { height: 300px; }
+    .icon-btn { width: 52px; height: 52px; }
+}
+
+/* Mobile menu animation and accessibility improvements */
+.mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: max-height 0.32s ease, opacity 0.32s ease, transform 0.32s ease;
+}
+.mobile-menu.active {
+    max-height: 400px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Mobile search overlay styles */
+.mobile-search-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    z-index: 4000;
+}
+.mobile-search-overlay {
+    /* modern glass effect, falls back to semi-opaque bg */
+    backdrop-filter: blur(6px) saturate(120%);
+    -webkit-backdrop-filter: blur(6px) saturate(120%);
+}
+.mobile-search-overlay[aria-hidden="false"], .mobile-search-overlay.active {
+    display: flex;
+}
+.mobile-search-content {
+    width: 100%;
+    max-width: 720px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.96));
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    transform: translateY(-10px);
+    opacity: 0;
+    transition: transform 0.28s cubic-bezier(.2,.9,.3,1), opacity 0.28s ease;
+}
+.mobile-search-overlay.active .mobile-search-content,
+.mobile-search-overlay[aria-hidden="false"] .mobile-search-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+.mobile-search-close {
+    background: none;
+    border: none;
+    font-size: 28px;
+    float: right;
+    cursor: pointer;
+}
+.mobile-search-box {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.mobile-search-box input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    font-size: 16px;
+}
+.mobile-search-box .search-btn { width: 46px; height: 46px; border-radius: 10px; }
+.mobile-search-overlay .search-suggestions { max-height: 300px; overflow-y: auto; }
+
+/* Suggestions modern layout */
+.mobile-search-suggestions {
+    display: grid;
+    gap: 10px;
+}
+.mobile-search-suggestions .suggestion-card {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 10px;
+    border-radius: 12px;
+    background: var(--light-gray);
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.mobile-search-suggestions .suggestion-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.suggestion-card .thumb {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+.suggestion-card .meta {
+    flex: 1;
+}
+.suggestion-card .meta .title {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 6px;
+}
+.suggestion-card .meta .sub {
+    font-size: 13px;
+    color: var(--gray);
+}
+.suggestion-card .meta .price {
+    margin-top: 6px;
+    color: var(--primary-color);
+    font-weight: 700;
+}
+.suggestion-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+/* chips for quick categories / recent searches */
+.search-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+.chip {
+    background: rgba(0,0,0,0.03);
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    color: var(--text-dark);
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.chip:hover { background: rgba(0,0,0,0.06); }
+
+/* dark-mode adjustments */
+body.dark-mode .mobile-search-content {
+    background: linear-gradient(180deg, rgba(15,15,30,0.98), rgba(15,15,30,0.95));
+}
+body.dark-mode .mobile-search-suggestions .suggestion-card {
+    background: rgba(255,255,255,0.02);
+}
+
+/* Hero tweaks for specific small devices */
+@media (max-width: 420px) {
+    .hero { height: 360px; }
+    .hero-content h1 { font-size: 28px; }
+    .hero-content p { font-size: 15px; }
+}
+@media (max-width: 375px) {
+    .hero { height: 340px; }
+    .hero-content h1 { font-size: 24px; }
+    .hero-content p { font-size: 14px; }
+    .hero-image { display: none; }
+}
+@media (max-width: 360px) {
+    .hero { height: 320px; }
+    .hero-content h1 { font-size: 22px; }
+    .hero-content p { font-size: 13px; }
+}

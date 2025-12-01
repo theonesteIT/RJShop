@@ -78,6 +78,10 @@
                 </div>
 
                 <div class="nav-icons">
+                    <!-- Mobile search toggle -->
+                    <button class="icon-btn search-toggle mobile-only" aria-label="Open search" id="mobileSearchToggle">
+                        <i class="fas fa-search"></i>
+                    </button>
                     <button class="icon-btn theme-toggle" onclick="toggleTheme()">
                         <i class="fas fa-moon"></i>
                     </button>
@@ -97,13 +101,25 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
             <a href="#home">Home</a>
             <a href="#shop">Shop</a>
             <a href="#about">About</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
+
+    <!-- Mobile Search Overlay -->
+    <div id="mobileSearchOverlay" class="mobile-search-overlay" aria-hidden="true">
+        <div class="mobile-search-content">
+            <button class="mobile-search-close" id="mobileSearchClose" aria-label="Close search">&times;</button>
+            <div class="mobile-search-box">
+                <input type="text" id="mobileSearchInput" placeholder="Search for products..." oninput="showMobileSearchSuggestions()">
+                <button class="search-btn" onclick="performMobileSearch()"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="search-suggestions" id="mobileSearchSuggestions"></div>
+        </div>
+    </div>
 
     <!-- Cart Sidebar -->
     <div class="cart-sidebar" id="cartSidebar">
