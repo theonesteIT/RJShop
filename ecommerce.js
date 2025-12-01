@@ -353,7 +353,7 @@ function displayCartItems() {
     
     if (cartItems.length === 0) {
         cartItemsDiv.innerHTML = '<p class="empty-cart">Your cart is empty</p>';
-        document.getElementById('cartTotal').textContent = '$0.00';
+        document.getElementById('cartTotal').textContent = 'Frw 0.00';
         return;
     }
     
@@ -369,7 +369,7 @@ function displayCartItems() {
                 <div class="cart-item-image" style="background: url('${item.image}') center/cover;"></div>
                 <div class="cart-item-details">
                     <h4>${item.title}</h4>
-                    <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                    <div class="cart-item-price">Frw ${item.price.toFixed(2)}</div>
                     <div class="cart-item-quantity">
                         <button onclick="updateCartQuantity(${item.id}, -1)">-</button>
                         <span>${item.quantity}</span>
@@ -384,7 +384,7 @@ function displayCartItems() {
     });
     
     cartItemsDiv.innerHTML = html;
-    document.getElementById('cartTotal').textContent = `$${total.toFixed(2)}`;
+    document.getElementById('cartTotal').textContent = `Frw ${total.toFixed(2)}`;
 }
 
 function updateCartCount() {
@@ -479,8 +479,8 @@ function createProductCard(product, badgeType = null) {
                     <span>(${product.reviews})</span>
                 </div>
                 <div class="product-price">
-                    <span class="current-price">$${product.price.toFixed(2)}</span>
-                    ${product.oldPrice ? `<span class="old-price">$${product.oldPrice.toFixed(2)}</span>` : ''}
+                    <span class="current-price">Frw ${product.price.toFixed(2)}</span>
+                    ${product.oldPrice ? `<span class="old-price">Frw ${product.oldPrice.toFixed(2)}</span>` : ''}
                 </div>
                 <button class="btn-primary" onclick="addToCart(${product.id})">
                     <i class="fas fa-shopping-cart"></i> Add to Cart
